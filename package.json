@@ -1,0 +1,66 @@
+{
+  "name": "@planet-a/avsc-zstandard-codec",
+  "version": "0.0.0",
+  "description": "A `zstandard` codec for `avsc`",
+  "source": "src/index.ts",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
+  "private": false,
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rimraf dist && parcel build",
+    "test": "node --import tsx --test ./src/**/*.test.ts",
+    "test:watch": "node --import tsx --test --watch ./src/**/*.test.ts",
+    "test:coverage": "c8 node --import tsx --test ./src/**/*.test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/planet-a-ventures/avsc-zstandard-codec.git"
+  },
+  "author": "Planet A Ventures <dev@planet-a.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/planet-a-ventures/avsc-zstandard-codec/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "avcs",
+    "node",
+    "npm",
+    "avro",
+    "zstandard",
+    "zstd",
+    "codec",
+    "compression",
+    "snowflake"
+  ],
+  "homepage": "https://github.com/planet-a-ventures/avsc-zstandard-codec#readme",
+  "dependencies": {
+    "@mongodb-js/zstd": "^1.2.1",
+    "buffer-crc32": "^1.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@parcel/packager-ts": "^2.12.0",
+    "@parcel/transformer-typescript-types": "^2.12.0",
+    "@types/node": "^22.5.5",
+    "avsc": "^5.7.7",
+    "c8": "^10.1.2",
+    "memfs": "^4.11.1",
+    "parcel": "^2.12.0",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  },
+  "peerDependencies": {
+    "avsc": "^5.7.7"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
