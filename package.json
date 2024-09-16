@@ -1,6 +1,6 @@
 {
   "name": "@planet-a/avsc-zstandard-codec",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A `zstandard` codec for `avsc`",
   "source": "src/index.ts",
   "module": "dist/module.js",

@@ -44,11 +44,11 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         run: npm version ${{steps.get_tag_version.outputs.TAG_VERSION}}
       - name: npm install
-        run: npm install
+        run: nix develop --command npm install
       - name: Build
         run: npm run build
       - name: Pack
-        run: npm pack
+        run: nix develop --command npm pack
       - name: Archive generated npm package
         uses: actions/upload-artifact@v4
         with:
