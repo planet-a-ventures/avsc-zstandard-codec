@@ -2,7 +2,19 @@
 
 [Zstandard](https://github.com/facebook/zstd) codec for [avsc](https://github.com/mtth/avsc).
 
-Example:
+## How to install
+
+```shell
+npm i @planet-a/avsc-zstandard-codec
+```
+
+or
+
+```shell
+yarn add @planet-a/avsc-zstandard-codec
+```
+
+## Example:
 
 ```ts
 import Avro from "avsc";
@@ -22,11 +34,10 @@ const mySchema = Avro.Type.forSchema({ type: "string" });
       ...Avro.streams.BlockEncoder.defaultCodecs(),
       ...createEncoderMixin(),
     },
-  });
-
-  fileEncoder.write("Hello");
-  fileEncoder.write("World");
-  fileEncoder.end();
+  })
+    .write("Hello")
+    .write("World")
+    .end();
   await finished(fileEncoder);
 }
 
@@ -37,9 +48,7 @@ const mySchema = Avro.Type.forSchema({ type: "string" });
       ...Avro.streams.BlockEncoder.defaultCodecs(),
       ...createDecoderMixin(),
     },
-  });
-
-  fileDecoder.on("data", console.log.bind(console));
+  }).on("data", console.log.bind(console));
   await finished(fileDecoder);
 }
 ```
@@ -55,9 +64,9 @@ It uses the [@mongodb-js/zstd](https://github.com/mongodb-js/zstd) package, as t
 
 You'll see that the current implementation uses defaults from the [Avro repository](https://github.com/apache/avro).
 
-Namely
+Namely:
 
-- codec name (if you don't adhere to `zstandard` the file won't be readable at all)
+- the codec name (if you don't adhere to `zstandard` the file won't be readable at all)
 - whether to use a checksum or not (with checksum, the metadata will be readable, but the data will yield an error (`Could not read file`)).
 
 The reason for that is, that in order to make the Avro export as portable as possible, we need to make sure that none of these things need to be specified. A prime example of that is for example Snowflake's Avro support ([`COPY INTO`](https://docs.snowflake.com/en/sql-reference/sql/copy-into-table)). Specifically, if you alter the codec name and/or the checksum flag, you won't be able to use the generated Avro files via their product.
