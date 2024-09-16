@@ -27,6 +27,8 @@
         pre-commit.settings.hooks.commitizen.enable = true;
         pre-commit.settings.hooks.typos.enable = true;
         pre-commit.settings.hooks.prettier.enable = true;
+        pre-commit.settings.hooks.yamllint.enable = true;
+        pre-commit.settings.hooks.yamlfmt.enable = true;
 
         # NOTE: You can also use `config.pre-commit.devShell`
         devShells.default = pkgs.mkShell {
