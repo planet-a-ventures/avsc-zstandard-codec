@@ -27,7 +27,7 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report
+          name: coverage.zip
           path: coverage/
   npm:
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
       - name: Archive generated npm package
         uses: actions/upload-artifact@v4
         with:
-          name: npm-package
+          name: npm-package.zip
           path: planet-a-avsc-zstandard-codec-*.tgz
       - name: Publish to npm
         if: startsWith(github.ref, 'refs/tags/')
