@@ -128,3 +128,15 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# OSX
+.DS_Store
+
+# pre commit hook
+/.pre-commit-config.yaml
+
+# Direnv
+.direnv
+
+# npm pack
+planet-a-avsc-zstandard-codec-*.tgz
