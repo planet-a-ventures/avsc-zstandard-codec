@@ -10,6 +10,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/module.js",
+      "require": "./dist/module.js"
+    }
+  },
   "scripts": {
     "build": "rimraf dist && parcel build",
     "test": "node --import tsx --test ./src/**/*.test.ts",
