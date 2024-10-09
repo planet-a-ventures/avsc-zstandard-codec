@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        avsc: [5.7.x, 6.x]
+        avsc: [5.7.x, 6.0.0-alpha.14]
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v12

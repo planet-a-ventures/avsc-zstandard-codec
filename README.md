@@ -58,7 +58,7 @@ const mySchema = Avro.Type.forSchema({ type: "string" });
 It uses the [@mongodb-js/zstd](https://github.com/mongodb-js/zstd) package, as this package has a few advantages:
 
 - The `decompress` function does not need the uncompressed buffer size in advance, a restriction which most other WASM-based implementations have and renders them unusable for this task
-- It works with `Buffer`. Whilst a `Uint8Array` implementation would be more portable (I am looking at you, Deno), `avsc` itself is still using `Buffer`. When/if https://github.com/mtth/avsc/pull/452 lands, we might have some more options of what packages to use.
+- It works with `Buffer`. Whilst a `Uint8Array` implementation would be more portable (I am looking at you, Deno), `avsc@5.7` itself is using `Buffer`. https://github.com/mtth/avsc/pull/452 has landed, so we might have some more options of what packages to use once we drop `avsc@5.7.x` support.
 
 ## A note about `Snowflake` compatibility
 
