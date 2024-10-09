@@ -56,7 +56,6 @@
     "@parcel/packager-ts": "^2.12.0",
     "@parcel/transformer-typescript-types": "^2.12.0",
     "@types/node": "^22.5.5",
-    "avsc": "^5.7.7",
     "c8": "^10.1.2",
     "memfs": "^4.11.1",
     "parcel": "^2.12.0",
@@ -65,7 +64,7 @@
     "typescript": "^5.6.2"
   },
   "peerDependencies": {
-    "avsc": "^5.7.7"
+    "avsc": "^5.7.7 || 6.x"
   },
   "engines": {
     "node": ">=20"
