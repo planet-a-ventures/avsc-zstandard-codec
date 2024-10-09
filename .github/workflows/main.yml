@@ -25,14 +25,14 @@ jobs:
         run: pre-commit run --all-files
       - name: npm install
         run: npm ci
-      - name: Install avsc@5.7
+      - name: Install avsc
         run: npm install --no-save avsc@${{ matrix.avsc }}
-      - name: Test (${{ matrix.avsc }})
+      - name: Test
         run: npm run test:coverage
-      - name: Archive code coverage (${{ matrix.avsc }}) results
+      - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.avsc }}.zip
+          name: coverage.zip
           path: coverage/
   npm:
     runs-on: ubuntu-latest
