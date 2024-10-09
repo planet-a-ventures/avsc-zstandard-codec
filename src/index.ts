@@ -45,17 +45,31 @@ export class ChecksumError extends Error {
   }
 }
 
+/**
+ * This is a backwards compatibility workaround for
+ * the fact that 5.7.x uses Buffer and 6.x uses Uint8Array.
+ *
+ * When removing 5.7.x support:
+ *  - remove this function
+ *  - migrate to crc32 that takes a Uint8Array
+ *  - migrate to zstd that takes a Uint8Array
+ */
+function compat57(bufOrArr: Buffer | Uint8Array): Buffer {
+  return bufOrArr instanceof Uint8Array ? Buffer.from(bufOrArr) : bufOrArr;
+}
+
 export function createEncoderMixin(
   options: z.input<typeof optionsSchema> = {},
 ): Avro.CodecOptions {
   const { name, compression, useChecksum } = optionsSchema.parse(options);
   return {
-    [name]: (buf, cb) => {
+    [name]: (bufOrArr: Buffer | Uint8Array, cb) => {
+      const buf = compat57(bufOrArr);
       compress(buf, compression)
         .then((deflated) => {
           if (useChecksum) {
             const checksum = crc32(buf);
-            cb(null, Buffer.concat([deflated, checksum]));
+            cb(null, Buffer.concat([deflated, Buffer.from(checksum)]));
           } else {
             cb(null, deflated);
           }
@@ -70,7 +84,8 @@ export function createDecoderMixin(
 ): Avro.CodecOptions {
   const { name, useChecksum } = optionsSchema.parse(options);
   return {
-    [name]: (buf, cb) => {
+    [name]: (bufOrArr: Buffer | Uint8Array, cb) => {
+      const buf = compat57(bufOrArr);
       decompress(useChecksum ? buf.subarray(0, buf.length - 4) : buf)
         .then((inflated) => {
           if (useChecksum) {
